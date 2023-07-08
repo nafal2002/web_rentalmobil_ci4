@@ -1,0 +1,18 @@
+CRITICAL - 2023-07-07 06:47:53 --> Class "Locale" not found
+in SYSTEMPATH\CodeIgniter.php on line 194.
+ 1 ROOTPATH\spark(83): CodeIgniter\CodeIgniter->initialize()
+CRITICAL - 2023-07-07 06:48:22 --> Class "Locale" not found
+in SYSTEMPATH\CodeIgniter.php on line 194.
+ 1 ROOTPATH\spark(83): CodeIgniter\CodeIgniter->initialize()
+INFO - 2023-07-07 05:04:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-07-07 16:18:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2023-07-07 16:18:11 --> include(D:\xampp\htdocs\Car-rent\vendor\composer/../myth/auth/src/Filters/LoginFilter.php): Failed to open stream: No such file or directory
+in VENDORPATH\composer\ClassLoader.php on line 582.
+ 1 VENDORPATH\composer\ClassLoader.php(582): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(D:\\xampp\\htdocs\\Car-rent\\vendor\\composer/../myth/auth/src/Filters/LoginFilter.php): Failed to open stream: No such file or directory', 'D:\\xampp\\htdocs\\Car-rent\\vendor\\composer\\ClassLoader.php', 582)
+ 2 VENDORPATH\composer\ClassLoader.php(582): include()
+ 3 VENDORPATH\composer\ClassLoader.php(433): Composer\Autoload\{closure}('D:\\xampp\\htdocs\\Car-rent\\vendor\\composer/../myth/auth/src/Filters/LoginFilter.php')
+ 4 SYSTEMPATH\Filters\Filters.php(173): Composer\Autoload\ClassLoader->loadClass('Myth\\Auth\\Filters\\LoginFilter')
+ 5 SYSTEMPATH\CodeIgniter.php(473): CodeIgniter\Filters\Filters->run('product', 'before')
+ 6 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('D:\\xampp\\htdocs\\Car-rent\\public\\index.php')
