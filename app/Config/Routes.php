@@ -29,36 +29,60 @@ $routes->setAutoRoute(true);
  * --------------------------------------------------------------------
  */
 
-// We get a performance increase by specifying the default
-// route since we don't have to scan directories.
-
-
+// Frontend Routes
 $routes->get('/', 'Home::index');
-
-$routes->get('admin', 'Layout::index', ['filter' => 'role:admin']);
-
-$routes->group('admin','users' , function ($routes) {
-	$routes->get('/', 'Layout::index');
-	$routes->get('login', 'Login::index');
-	$routes->post('login', 'Admin\Login::login');
-	$routes->get('logout', 'Admin\Login::logout');
-	$routes->get('checkout','Backend/checkout');
-});
-
 $routes->get('product', 'Product::index');
 $routes->get('product/detail/(:num)', 'Product::detail/$1');
 $routes->get('product/checkout/(:num)', 'Product::checkout/$1');
 $routes->post('product/save/(:num)/(:num)', 'Product::save/$1/$2');
-
 $routes->get('account', 'Account::index');
-$routes->get('backend', 'Backend\Layout::index');
 
+// Admin Routes
+$routes->get('admin', 'Layout::index', ['filter' => 'role:admin']);
+$routes->get('dashboard/admin', 'Dashboard::admin', ['filter' => 'role:admin']);
+
+$routes->group('admin', ['namespace' => 'App\\Controllers', 'filter' => 'role:admin'], function ($routes) {
+	$routes->get('/', 'Layout::index');
+	$routes->get('login', 'Login::index');
+	$routes->post('login', 'Admin\\Login::login');
+	$routes->get('logout', 'Admin\\Login::logout');
+	$routes->get('checkout', 'Backend/checkout');
+});
+
+// Authentication Routes
 $routes->group('auth', ['namespace' => 'IonAuth\Controllers'], function ($routes) {
 	$routes->add('login', 'Auth::login');
 	$routes->get('logout', 'Auth::logout');
 	$routes->add('forgot_password', 'Auth::forgot_password');
 });
 
+// REST API Routes - Bookings
+$routes->group('api/v1', ['namespace' => 'App\\Controllers\\Api'], function ($routes) {
+	// Booking endpoints
+	$routes->get('bookings', 'BookingController::index');
+	$routes->post('bookings', 'BookingController::create');
+	$routes->get('bookings/(:num)', 'BookingController::show/$1');
+	$routes->put('bookings/(:num)', 'BookingController::update/$1');
+	$routes->delete('bookings/(:num)', 'BookingController::delete/$1');
+	$routes->get('bookings/customer/(:num)', 'BookingController::customerBookings/$1');
+
+	// Payment endpoints
+	$routes->get('payments', 'PaymentController::index');
+	$routes->post('payments', 'PaymentController::create');
+	$routes->get('payments/(:num)', 'PaymentController::show/$1');
+	$routes->put('payments/(:num)/status', 'PaymentController::updateStatus/$1');
+	$routes->get('payments/revenue', 'PaymentController::revenue');
+
+	// Analytics endpoints
+	$routes->get('analytics', 'AnalyticsController::index');
+	$routes->get('analytics/latest', 'AnalyticsController::latest');
+	$routes->post('analytics/calculate', 'AnalyticsController::calculate');
+
+	// Reviews endpoints
+	$routes->get('reviews/(:num)', 'ReviewController::index/$1');
+	$routes->post('reviews', 'ReviewController::create');
+	$routes->get('reviews/average', 'ReviewController::average');
+});
 
 /**
  * --------------------------------------------------------------------
